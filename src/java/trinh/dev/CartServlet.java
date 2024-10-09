@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import trinh.dev.data.model.OrderItem;
+import trinh.dev.data.model.Product;
+import trinh.dev.util.Helper;
 
 /**
  *
@@ -28,7 +30,10 @@ public class CartServlet extends BaseServlet {
             cart = new ArrayList<OrderItem>();
         }
         
+//        OrderItem od = cart.get(0);
+//        Product p = od.getProduct();
         request.setAttribute("cart", cart);
+        request.setAttribute("total", Helper.total(cart));
         request.getRequestDispatcher("cart.jsp").include(request, response);
     }
 
@@ -43,7 +48,7 @@ public class CartServlet extends BaseServlet {
             case "update":
                 updateOrder(request);
                 break;
-            case "delte":
+            case "delete":
                 deleteOrder(request);
                 break;
             default:
@@ -83,6 +88,7 @@ public class CartServlet extends BaseServlet {
         if(!isExistInCart){
             cart.add(orderItem);
         }
+        
         session.setAttribute("cart", cart);
     }
 

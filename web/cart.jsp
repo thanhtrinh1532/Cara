@@ -37,7 +37,7 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach items="${cart}" var="orderIem">
+                <c:forEach items="${cart}" var="orderItem">
                     <tr>
                         <td>
                             <form action="CartServlet" method=""post>
@@ -53,7 +53,7 @@
                             <form action="CartServlet" method="post">
                                 <input type="hidden" name="action" value="update"/>
                                 <input type="hidden" name="productId" value="${orderItem.productId}"/>
-                                <input onchange="this.form.submit" name="quantity" type="number" value="1" min="1">
+                                <input onchange="this.form.submit()" name="quantity" type="number" value="${orderItem.quantity}" min="1">
                         </td>
                         <td>${orderItem.price * orderItem.quantity}</td>
                     </tr>
@@ -76,7 +76,7 @@
             <table>
                 <tr>
                     <td>Cart Subtotal</td>
-                    <td>$335</td>
+                    <td>${total}</td>
                 </tr>
                 <tr>
                     <td>Shipping</td>
@@ -84,10 +84,10 @@
                 </tr>
                 <tr>
                     <td><strong>Total</strong></td>
-                    <td><strong>$335</strong></td>
+                    <td><strong>${total}</strong></td>
                 </tr>
             </table>
-            <button class="normal">Proceed to checkout</button>
+                <a href="CheckoutServlet" class="normal btn btn-success">Proceed to checkout</a>
         </div>
     </section>
 
